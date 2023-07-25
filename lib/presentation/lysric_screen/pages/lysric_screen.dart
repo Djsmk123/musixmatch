@@ -1,21 +1,16 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:musixmatch/core/errors/failures.dart';
+import 'package:musixmatch/core/utils/bookmark/bookmarks_method.dart';
 import 'package:musixmatch/core/widgets/error_widget.dart';
 import 'package:musixmatch/core/widgets/loading_widget.dart';
+import 'package:musixmatch/presentation/bookmarked_screen/bloc/bookmark_bloc.dart';
 import 'package:musixmatch/presentation/lysric_screen/bloc/lysric_bloc.dart';
 import 'package:musixmatch/presentation/lysric_screen/widgets/lysric_view_builder.dart';
-import 'package:musixmatch/repo/bookmark_repo/bookmark_service.dart';
-import 'package:musixmatch/repo/lysric_repo/model/track_lysric_model.dart';
-import 'package:musixmatch/repo/trending_repo/models/trending_item_model.dart';
-
-import '../../repo/bookmark_repo/model/bookmark_track.dart';
+import 'package:musixmatch/repo/musixmatch_repo/models/track_lysric_model.dart';
+import 'package:musixmatch/repo/musixmatch_repo/models/track_model.dart';
 
 @RoutePage(name: 'LyricsView')
 class LyricsScreen extends StatefulWidget {
@@ -34,50 +29,14 @@ class _LyricsScreenState extends State<LyricsScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       BlocProvider.of<LysricBloc>(context).add(LyriscFetch(widget.trackId));
-      checkBookMark();
+      checkBookMark(widget.trackId, (value) {
+        isBookmarked = value;
+        setState(() {});
+      });
     });
     //check is bookmarked or not
 
     super.initState();
-  }
-
-  Future<void> checkBookMark() async {
-    final res = BookMarkService.getBookmarkById(widget.trackId);
-    res.fold((l) => log(getErrorMessage(l)), (r) {
-      isBookmarked = r != null;
-    });
-    setState(() {});
-  }
-
-  Future<void> addBookmark(String trackId, String trackName) async {
-    try {
-      EasyLoading.show(status: 'loading...');
-      final res = await BookMarkService.addBookmark(
-          Bookmark(trackId: int.parse(trackId), trackName: trackName));
-      res.fold((l) => throw (l), (r) {
-        isBookmarked = true;
-        EasyLoading.showSuccess("Bookmarked successfully");
-      });
-    } catch (e) {
-      EasyLoading.showError("Something went wrong");
-    }
-
-    setState(() {});
-  }
-
-  Future<void> removeBookMark(String trackId) async {
-    try {
-      EasyLoading.show(status: 'loading...');
-      final res = await BookMarkService.removeBookmark(trackId.toString());
-      res.fold((l) => throw (l), (r) {
-        isBookmarked = false;
-        EasyLoading.showSuccess("Bookmarked removed successfully");
-      });
-    } catch (e) {
-      EasyLoading.showError("Something went wrong");
-    }
-
-    setState(() {});
   }
 
   @override
@@ -111,9 +70,20 @@ class _LyricsScreenState extends State<LyricsScreen> {
                     ),
                     onPressed: () {
                       isBookmarked
-                          ? removeBookMark(state.trackId.toString())
+                          ? removeBookMark(state.trackId.toString(), () {
+                              setState(() {
+                                isBookmarked = false;
+                              });
+                            })
                           : addBookmark(state.trackId.toString(),
-                              state.trackName.toString());
+                              state.trackName.toString(), () {
+                              setState(() {
+                                isBookmarked = true;
+                              });
+                            });
+                      // update bookmarks state
+                      BlocProvider.of<BookmarkBloc>(context)
+                          .add(BookmarkFetchEvent());
                     },
                   );
                 }
@@ -132,7 +102,10 @@ class _LyricsScreenState extends State<LyricsScreen> {
               return const LoadingWidget();
             }
             if (state is LysricError) {
-              return CustomErrorWidget(msg: state.message);
+              return CustomErrorWidget(
+                msg: state.message,
+                hasBackOption: true,
+              );
             }
             if (state is LysricLoaded) {
               TrackModel trackModel = state.track;

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:musixmatch/core/themes/colors.dart';
 
 class EmptyListWidget extends StatelessWidget {
   final String message;
@@ -14,14 +13,9 @@ class EmptyListWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: 10.h,
-          ),
-          Text(
-            "No entry found, yet",
-            style: TextStyle(
-                color: CustomColors.primaryColor,
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold),
+            height: 200.h,
+            child:
+                Image.network("https://i.ibb.co/qdCzK7V/Basic-Element-35.png"),
           ),
           SizedBox(
             height: 10.h,
@@ -36,8 +30,8 @@ class EmptyListWidget extends StatelessWidget {
                     message,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16.sp,
+                      color: Colors.white,
+                      fontSize: 20.sp,
                     ),
                   ),
                 ),

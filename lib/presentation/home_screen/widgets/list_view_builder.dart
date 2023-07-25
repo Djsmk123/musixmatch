@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:musixmatch/repo/trending_repo/models/trending_item_model.dart';
+import 'package:musixmatch/repo/musixmatch_repo/models/track_model.dart';
 
 import 'list_card_builder.dart';
 

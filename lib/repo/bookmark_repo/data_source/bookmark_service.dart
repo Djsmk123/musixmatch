@@ -4,7 +4,7 @@ import 'dart:developer';
 
 import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musixmatch/core/errors/exceptions.dart';
 import 'package:musixmatch/core/errors/failures.dart';
 import 'package:musixmatch/repo/bookmark_repo/model/bookmark_track.dart';
@@ -70,5 +70,9 @@ class BookMarkService {
       log(e.toString());
       return Left(StorageFailure());
     }
+  }
+
+  static listenBox() {
+    return Hive.box<Bookmark>('bookmarks').listenable();
   }
 }

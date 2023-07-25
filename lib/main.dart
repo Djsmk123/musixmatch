@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:musixmatch/core/blocs/bloc_core.dart';
 import 'package:musixmatch/core/themes/theme.dart';
-import 'package:musixmatch/repo/bookmark_repo/bookmark_service.dart';
+import 'package:musixmatch/repo/bookmark_repo/data_source/bookmark_service.dart';
 import 'package:musixmatch/repo/bookmark_repo/model/bookmark_track.dart';
 import 'package:musixmatch/routing/routing_dat.dart';
 

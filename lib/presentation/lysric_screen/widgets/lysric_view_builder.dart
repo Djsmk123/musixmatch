@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musixmatch/core/themes/colors.dart';
-import 'package:musixmatch/repo/lysric_repo/model/track_lysric_model.dart';
-import 'package:musixmatch/repo/trending_repo/models/trending_item_model.dart';
+import 'package:musixmatch/core/widgets/track_image_widget.dart';
+import 'package:musixmatch/repo/musixmatch_repo/models/track_lysric_model.dart';
+import 'package:musixmatch/repo/musixmatch_repo/models/track_model.dart';
 
 import '../../../core/utils/share_utils.dart';
+import '../../../core/widgets/liked_fav_widget.dart';
 import '../../../core/widgets/value_builder_widget.dart';
-import '../../home_screen/widgets/list_card_builder.dart';
 
 class LysricViewBuilder extends StatelessWidget {
   final TrackModel trackModel;
@@ -22,47 +23,24 @@ class LysricViewBuilder extends StatelessWidget {
         children: [
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  Flexible(
+                      child: Text(
                     trackModel.trackName,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         color: CustomColors.primaryColor,
                         fontSize: 30.sp,
                         fontWeight: FontWeight.w700),
-                  )
+                  )),
                 ],
               ),
             ),
           ),
-          Center(
-            child: Container(
-              color: Colors.black,
-              child: Center(
-                child: Container(
-                  width: 300,
-                  height: 300,
-                  decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.circular(40),
-                    image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: NetworkImage(
-                            "https://daily.jstor.org/wp-content/uploads/2023/01/good_times_with_bad_music_1050x700.jpg")),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.blue.withOpacity(0.5),
-                          offset: const Offset(0, 25),
-                          blurRadius: 3,
-                          spreadRadius: -10)
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
+          const Center(child: TrackImageWidget()),
           const SizedBox(
             height: 20,
           ),
@@ -111,12 +89,15 @@ class LysricViewBuilder extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          Text(
-            lyriscModel.lyricsBody,
-            style: TextStyle(
-                color: CustomColors.primaryColor,
-                fontWeight: FontWeight.w300,
-                fontSize: 18.sp),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            child: Text(
+              lyriscModel.lyricsBody,
+              style: TextStyle(
+                  color: CustomColors.primaryColor,
+                  fontWeight: FontWeight.w300,
+                  fontSize: 18.sp),
+            ),
           )
         ],
       ),

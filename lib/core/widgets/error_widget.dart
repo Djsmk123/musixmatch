@@ -5,7 +5,10 @@ import 'package:musixmatch/core/widgets/rounded_button.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   final String msg;
-  const CustomErrorWidget({Key? key, required this.msg}) : super(key: key);
+  final bool hasBackOption;
+  const CustomErrorWidget(
+      {Key? key, required this.msg, required this.hasBackOption})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,10 +17,11 @@ class CustomErrorWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          /*SizedBox(
-            height: 150.h,
-            child: Assets.images.errorVector.image(),
-          ),*/
+          SizedBox(
+            height: 200.h,
+            child: Image.network(
+                "https://i.ibb.co/6PRbhG1/Find-error-message-rendered-illustration-on-transparent-background-PNG.png"),
+          ),
           SizedBox(
             height: 20.h,
           ),
@@ -48,22 +52,23 @@ class CustomErrorWidget extends StatelessWidget {
           SizedBox(
             height: 10.h,
           ),
-          CustomRoundedButton(
-            width: 0.5.sw,
-            backgroundColor: Colors.white,
-            onTap: () {
-              Navigator.pop(context);
-            },
-            border: Border.all(color: CustomColors.primaryColor, width: 2),
-            borderRadius: BorderRadius.circular(32.r),
-            child: Text(
-              "Back",
-              style: TextStyle(
-                  color: CustomColors.primaryColor,
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.bold),
+          if (hasBackOption)
+            CustomRoundedButton(
+              width: 0.5.sw,
+              backgroundColor: Colors.white,
+              onTap: () {
+                Navigator.pop(context);
+              },
+              border: Border.all(color: CustomColors.primaryColor, width: 2),
+              borderRadius: BorderRadius.circular(32.r),
+              child: Text(
+                "Back",
+                style: TextStyle(
+                    color: CustomColors.primaryColor,
+                    fontSize: 20.sp,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
-          ),
         ],
       ),
     );

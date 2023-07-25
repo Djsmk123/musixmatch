@@ -10,11 +10,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:flutter/material.dart' as _i5;
-import 'package:musixmatch/presentation/bookmarked_screen/bookmarks_screen.dart'
+import 'package:musixmatch/presentation/bookmarked_screen/pages/bookmarks_screen.dart'
     as _i1;
 import 'package:musixmatch/presentation/home_screen/pages/home_screen.dart'
     as _i2;
-import 'package:musixmatch/presentation/lysric_screen/lysric_screen.dart'
+import 'package:musixmatch/presentation/lysric_screen/pages/lysric_screen.dart'
     as _i3;
 
 abstract class $AppRouter extends _i4.RootStackRouter {

@@ -35,7 +35,10 @@ class _TrendingSongViewBuilderState extends State<TrendingSongViewBuilder> {
         );
       }
       if (state is TrendingError) {
-        return CustomErrorWidget(msg: state.message);
+        return CustomErrorWidget(
+          msg: state.message,
+          hasBackOption: false,
+        );
       }
 
       if (state is TrendingEmpty) {

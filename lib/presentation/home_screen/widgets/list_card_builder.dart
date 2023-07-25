@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:musixmatch/routing/routing_dat.gr.dart';
 
+import '../../../core/widgets/liked_fav_widget.dart';
 import '../../../core/widgets/rounded_button.dart';
 import '../../../core/widgets/value_builder_widget.dart';
-import '../../../repo/trending_repo/models/trending_item_model.dart';
+import '../../../repo/musixmatch_repo/models/track_model.dart';
 
 class CardTrackBuilderWidget extends StatelessWidget {
   final TrackModel trackModel;
@@ -81,40 +82,6 @@ class CardTrackBuilderWidget extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class FavStateWidget extends StatelessWidget {
-  final int trackRating;
-  final int numFav;
-  const FavStateWidget(
-      {super.key, required this.trackRating, required this.numFav});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
-          children: [
-            const Icon(
-              Icons.star,
-              color: Colors.yellow,
-            ),
-            Text((trackRating / 10).toStringAsFixed(1))
-          ],
-        ),
-        Row(
-          children: [
-            const Icon(
-              Icons.favorite,
-              color: Colors.red,
-            ),
-            Text((numFav).toStringAsFixed(0))
-          ],
-        )
-      ],
     );
   }
 }
