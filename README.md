@@ -1,16 +1,45 @@
-# musixmatch
+# MusixMatch
+Lysric finder Application
 
-A new Flutter project.
+# API key 
+before starting the application you need API key from musixMatch
 
-## Getting Started
+https://developer.musixmatch.com/
 
-This project is a starting point for a Flutter application.
+# Setup environment
 
-A few resources to get you started if this is your first Flutter project:
+- create .env file in project directory
+- add API_KEY=$API_KEY
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+# Project Structure
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- core: Contains configuration for application globally
+- gen: Auto generate files (build_runner)
+- presentation: Contains Stateful UI Screen,Widgets and Blocs for State management
+   - Bloc
+   - Widgets
+   - Pages
+- repo: Contains Data models and Data sources and their implementations
+- routing: All the routing configuration(using Auto_route package)
+
+# Build package
+`dart run build_runner watch --delete-conflicting-outputs`
+
+
+# Release 
+
+`flutter build apk --release`
+
+
+# Output
+
+![home_screen](./outputs/1.jpg)
+![lysric_screen](./outputs/2.jpg)
+![bookmark_screen](./outputs/3.jpg)
+
+
+
+
+
+
+
