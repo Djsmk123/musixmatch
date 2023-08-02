@@ -1,10 +1,13 @@
-name: Shorebird Workflow Example
+name: Shorebird Workflow
 
 on:
   workflow_dispatch:
 
 jobs:
   patch-application:
+    defaults:
+      run:
+        shell: bash
     runs-on: ubuntu-latest
 
     steps:
@@ -15,6 +18,11 @@ jobs:
 
       - name: 🚀 Check Application
         run: shorebird apps list
+        env:
+          SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+
+      - name: 🚀 Shorebird doctor
+        run: shorebird doctor --fix
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
       - name: 🚀 Shorebird Patch
