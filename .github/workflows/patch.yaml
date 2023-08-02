@@ -17,8 +17,6 @@ jobs:
         run: shorebird apps list
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
-      - name: Print Working Directory
-        run: pwd
       - name: 🚀 Shorebird Patch
         run: shorebird patch android --force
         env:
