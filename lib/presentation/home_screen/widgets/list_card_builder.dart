@@ -66,7 +66,7 @@ class CardTrackBuilderWidget extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             Text(
-                              "View Lyrisc",
+                              "Details",
                               style: TextStyle(
                                   color: Colors.white, fontSize: 14.sp),
                             ),
