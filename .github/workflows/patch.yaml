@@ -19,6 +19,10 @@ jobs:
       # Now we're able to use Shorebird CLI in our workflow
       - name: 🚀 Use Shorebird
         run: shorebird --version
+      - name: shorebird init
+        run: shorebird init
+        env:
+          SHOREBIRD_TOKEN: ${{secrets.SHOREBIRD_TOKEN}}
 
       - name: 🚀 Shorebird Patch
         run: shorebird patch android --force
