@@ -21,11 +21,6 @@ jobs:
         run: shorebird apps list
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
-      - name: Build Flutter (Android)
-        run: |
-          git clone https://github.com/flutter/flutter.git -b stable
-          export PATH="$PWD/flutter/bin:$PATH"
-          flutter doctor
       # for testing purposes
       - name: 🚀 Shorebird doctor
         run: shorebird doctor --fix
