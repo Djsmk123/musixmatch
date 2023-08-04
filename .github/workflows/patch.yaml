@@ -21,6 +21,9 @@ jobs:
         run: shorebird apps list
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+      - name: List Files
+        run: |
+          ls -1
 
       - name: 🚀 Shorebird doctor
         run: shorebird doctor --fix
