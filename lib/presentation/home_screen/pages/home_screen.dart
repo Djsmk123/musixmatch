@@ -12,6 +12,14 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    List<BottomNavItem> navItems = [
+      BottomNavItem("Home", Icons.home),
+      BottomNavItem("Bookmark", Icons.bookmark),
+    ];
+    List<BottomNavigationBarItem> navigationBarItems = List.generate(
+        2,
+        (index) => BottomNavigationBarItem(
+            icon: Icon(navItems[index].icon), label: navItems[index].label));
     return Scaffold(
       backgroundColor: Colors.black87,
       appBar: AppBar(
@@ -91,12 +99,14 @@ class HomeScreen extends StatelessWidget {
         ),
         backgroundColor: Colors.black,
         unselectedItemColor: Colors.white,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.bookmark), label: "Bookmarks")
-        ],
+        items: navigationBarItems,
       ),
     );
   }
+} 
+
+class BottomNavItem {
+  final String label;
+  final IconData icon;
+  BottomNavItem(this.label, this.icon);
 }

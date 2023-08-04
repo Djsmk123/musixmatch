@@ -31,7 +31,7 @@ abstract class $AppRouter extends _i4.RootStackRouter {
     TrendingView.name: (routeData) {
       return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.HomeScreen(),
+        child: _i2.HomeScreen(),
       );
     },
     LyricsView.name: (routeData) {

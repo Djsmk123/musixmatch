@@ -1,7 +1,8 @@
 name: Shorebird Workflow
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [main]
 
 jobs:
   patch-application:
@@ -25,6 +26,7 @@ jobs:
         run: shorebird doctor --fix
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
+
       - name: 🚀 Shorebird Patch
         run: shorebird patch android --force
         env:
