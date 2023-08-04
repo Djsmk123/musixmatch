@@ -5,15 +5,13 @@ on:
     branches: [main]
 
 jobs:
-  patch-application:
-    defaults:
-      run:
-        shell: bash
+  shorebird_job:
     runs-on: ubuntu-latest
 
     steps:
       - name: 🐦 Setup Shorebird
-        uses: shorebirdtech/setup-shorebird@v0
+        uses: shorebirdtech/setup-shorebird@v1
+
       - name: 🚀 Use Shorebird
         run: shorebird --version
 
@@ -21,17 +19,14 @@ jobs:
         run: shorebird apps list
         env:
           SHOREBIRD_TOKEN: ${{ secrets.SHOREBIRD_TOKEN }}
-      - name: Build Flutter (Android)
-        needs: [ flutter_test ]
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@v3
-          - uses: actions/setup-java@v2
 
-          - uses: subosito/flutter-action@v2
-            with:
-              channel: "stable"g
-      # for testing purposes
+      - name: Build Flutter (Android)
+        run: |
+          git clone https://github.com/flutter/flutter.git -b stable
+          export PATH="$PWD/flutter/bin:$PATH"
+          flutter doctor
+          flutter build apk
+
       - name: 🚀 Shorebird doctor
         run: shorebird doctor --fix
         env:
