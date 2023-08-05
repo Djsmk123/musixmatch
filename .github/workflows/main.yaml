@@ -6,9 +6,7 @@ on:
 
 jobs:
   patch-application:
-    defaults:
-      run:
-        shell: bash
+
     runs-on: ubuntu-latest
 
     steps:
